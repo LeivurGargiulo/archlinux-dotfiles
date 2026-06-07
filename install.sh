@@ -21,11 +21,14 @@ log_info()  { echo -e "  ${BLUE}→${RESET}  $1"; }
 log_skip()  { echo -e "  ${YELLOW}↷${RESET}  $1 (ya era symlink, skip)"; }
 
 # ─── VERIFICAR DOTFILES DIR ────────────────────────────────────
-DOTFILES_DIR="$HOME/dotfiles"
+# Detecta automáticamente la ubicación del repo (donde vive este script),
+# así no importa el nombre con el que lo hayas clonado.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="${DOTFILES_DIR:-$SCRIPT_DIR}"
 
 if [[ ! -d "$DOTFILES_DIR" ]]; then
     echo -e "${RED}Error: $DOTFILES_DIR no existe.${RESET}"
-    echo "Clona el repo primero: git clone https://github.com/leivur/dotfiles.git ~/dotfiles"
+    echo "Clona el repo primero: git clone https://github.com/LeivurGargiulo/archlinux-dotfiles.git ~/archlinux-dotfiles"
     exit 1
 fi
 
