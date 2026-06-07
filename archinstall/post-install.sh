@@ -104,8 +104,6 @@ pac \
     xf86-video-amdgpu \
     libva-mesa-driver \
     lib32-libva-mesa-driver \
-    mesa-vdpau \
-    lib32-mesa-vdpau \
     vulkan-icd-loader \
     lib32-vulkan-icd-loader
 log_ok "Drivers AMD instalados"
@@ -158,7 +156,7 @@ pac \
     file-roller \
     yazi \
     ffmpegthumbnailer \
-    unar \
+    unarchiver \
     jq \
     poppler \
     fd \
@@ -176,7 +174,7 @@ pac \
     noto-fonts-cjk \
     noto-fonts-extra \
     ttf-jetbrains-mono-nerd \
-    ttf-inter \
+    inter-font \
     ttf-font-awesome \
     ttf-nerd-fonts-symbols \
     ttf-nerd-fonts-symbols-common \
