@@ -84,13 +84,14 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH"
-export STARSHIP_CONFIG="$HOME/dotfiles/starship/starship.toml"
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 export BAT_THEME="base16"
 export BAT_STYLE="numbers,changes,header"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 
 # Wayland
-export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-0}"
+# OJO: NO hardcodear WAYLAND_DISPLAY. Lo setea el compositor (Hyprland).
+# Si se fuerza acá, el guard del autostart de abajo nunca dispara.
 export QT_QPA_PLATFORM="wayland;xcb"
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export GDK_BACKEND="wayland,x11"
@@ -268,7 +269,7 @@ alias wallrandom="swww img \$(ls ~/Pictures/Wallpapers/*.{jpg,jpeg,png,gif,webp}
 alias lockscreen="loginctl lock-session"
 
 # ─── ALIASES: DIRECTORIES ──────────────────────────────────────
-alias dots="cd ~/dotfiles"
+alias dots="cd ~/archlinux-dotfiles"
 alias conf="cd ~/.config"
 alias proj="cd ~/Projects"
 alias dl="cd ~/Downloads"

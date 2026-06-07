@@ -63,7 +63,7 @@ use_os_path_sep = true
 "~/Downloads"  = " dl"
 "~/Projects"   = "󰲋 proj"
 "~/.config"    = " conf"
-"~/dotfiles"   = "󰊠 dots"
+"~/archlinux-dotfiles" = "󰊠 dots"
 "~/Pictures"   = "󰉔 pics"
 
 # ─── GIT BRANCH ────────────────────────────────────────────────
