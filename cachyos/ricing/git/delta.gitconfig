@@ -1,0 +1,40 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  delta.gitconfig — diffs dark monochrome · white accent      ║
+# ╠══════════════════════════════════════════════════════════════╣
+# ║  install-ricing.sh lo engancha vía: git config --global       ║
+# ║  include.path <ruta>/delta.gitconfig                         ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    dark = true
+    line-numbers = true
+    side-by-side = false
+    # Sin colores de sintaxis: texto plano (monocromático).
+    syntax-theme = none
+    # Removido / agregado se distinguen por brillo de fondo (gris), no por color.
+    minus-style          = normal "#161616"
+    minus-emph-style     = normal "#3a3a3a"
+    plus-style           = normal "#242424"
+    plus-emph-style      = normal "#4a4a4a"
+    # Cabeceras y decoraciones en blanco/gris.
+    file-style                   = "#ffffff" bold
+    file-decoration-style        = "#333333" ul
+    hunk-header-style            = "#888888"
+    hunk-header-decoration-style = "#333333" box
+    line-numbers-minus-style     = "#555555"
+    line-numbers-plus-style      = "#aaaaaa"
+    line-numbers-zero-style      = "#333333"
+    line-numbers-left-style      = "#333333"
+    line-numbers-right-style     = "#333333"
+    zero-style                   = "#888888"
+    whitespace-error-style       = "#ffffff" reverse
+
+[merge]
+    conflictstyle = zdiff3

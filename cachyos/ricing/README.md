@@ -1,10 +1,10 @@
-# Ricing add-ons — sobre HyDE / CachyOS
+# Ricing add-ons — dark glossy · white
 
-Capa de "rice por aplicación" y eyecandy que vive **encima** de HyDE sin tocar
-lo que HyDE administra (barra, launcher, notificaciones, lockscreen, wallpaper,
-motor de temas). Todo dark glossy / monochrome.
+Capa de "rice por aplicación" + extras, **todo monocromático (negro/grises +
+acento blanco)**, que vive **encima** de HyDE sin tocar lo que HyDE administra
+(barra, launcher, notificaciones, lockscreen, wallpaper, motor de temas).
 
-## Instalar
+## Instalar (automatiza todo lo posible)
 
 ```bash
 cd ~/archlinux-dotfiles
@@ -14,39 +14,51 @@ bash cachyos/ricing/install-ricing.sh
 
 Es resiliente: si un paquete del AUR falla, sigue con el resto y te avisa.
 
-## Qué incluye
+## Qué hace
 
-| Área | Qué hace | Manual restante |
-|------|----------|-----------------|
-| **Terminal** | `fastfetch` (config monocromática), **CAVA** (visualizer), `shell-color-scripts` + `pokemon-colorscripts` al abrir la shell | — |
-| **Spotify** | **Spicetify** + Marketplace | Marketplace → instalar **Bloom**, esquema `darkmono` |
+| Área | Automatizado | Manual restante |
+|------|--------------|-----------------|
+| **Terminal** | `fastfetch` (config monocromática) + **CAVA** (visualizer gris→blanco) | — |
+| **Spotify** | **Spicetify** + Marketplace | Marketplace → **Bloom**, esquema `darkmono` |
 | **Discord** | **Vesktop** (Discord + Vencord, ideal Wayland) | Online theme **VenTrans** + Enable Window Transparency |
-| **Firefox** | `userChrome.css` glossy + compacto, perfil autodetectado | reiniciar Firefox |
+| **Firefox** | `userChrome.css` glossy, perfil autodetectado + `user.js` | reiniciar Firefox |
+| **Neovim** | **Transparente** (LazyVim) → se ve el blur de kitty a través | — |
+| **yazi** | Tema monocromático (`theme.toml`) | — |
+| **git** | **delta** con diffs monocromáticos (enganchado en `~/.gitconfig`) | — |
+| **atuin** | Historial con TUI oscura (Ctrl-R), init en `user.zsh` | shell nueva |
+| **btop** | Tema `monochrome` aplicado | — |
+| **eza/ls** | `EZA_COLORS` monocromático (grises + dirs/exec blancos) | — |
 
 Detalle por app: ver `discord/README.md` y `firefox/README.md`.
 
+> **Quitados a propósito** (no son dark-glossy-white): pokemon/shell-color-scripts
+> (colorido) y MangoHud (overlay de gaming).
+
 ---
 
-## Extras (ideas para seguir puliendo)
+## Archivos
 
-No los automaticé para no inflar el script, pero son ganadores y fáciles:
+```
+ricing/
+├── install-ricing.sh      # instala y aplica TODO
+├── fastfetch/config.jsonc # monocromático
+├── cava/config            # visualizer gris → blanco
+├── firefox/userChrome.css # glass minimal + README
+├── discord/README.md      # Vesktop + VenTrans
+├── nvim/transparent.lua   # → ~/.config/nvim/lua/plugins/
+├── yazi/theme.toml        # monocromático (sección [mgr])
+├── git/delta.gitconfig    # diffs monocromáticos (include)
+├── atuin/config.toml      # TUI compacta oscura
+└── btop/monochrome.theme  # → ~/.config/btop/themes/
+```
 
-- **Neovim transparente** (tu LazyVim): en tu config de colorscheme,
-  ```lua
-  vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
-  vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
-  ```
-  así el blur de kitty se ve a través del editor.
-- **yazi flavor oscuro**: `ya pack -a yazi-rs/flavors:dracula` (o el que quieras) y
-  setealo en `~/.config/yazi/theme.toml`.
-- **delta** para diffs lindos: `pacman -S git-delta` + en `~/.gitconfig`:
-  `[core] pager = delta` · `[delta] dark = true  line-numbers = true`.
-- **atuin**: historial de shell con TUI oscura — `pacman -S atuin && atuin import auto`.
-- **vivid**: `LS_COLORS` coherentes — `pacman -S vivid` y en zsh
-  `export LS_COLORS="$(vivid generate ...)"`.
-- **btop tema**: poné un theme monocromático en `~/.config/btop/themes/`.
-- **MangoHud** (gaming): overlay de FPS glossy — `pacman -S mangohud`.
-- **Wallpapers**: dejá tus fondos dark en `~/Pictures/Wallpapers/` y usalos desde
-  el selector de HyDE (`SUPER + SHIFT + W`).
+## Notas / caveats
 
-¿Querés que automatice alguno de estos también? Decime cuál y lo agrego acá.
+- **eza**: `EZA_COLORS` (en `user.zsh`) tiene prioridad sobre cualquier
+  `theme.yml`, así que el monocromático queda garantizado.
+- **yazi**: el schema actual usa `[mgr]`. Si tu versión avisa, renombralo a
+  `[manager]` en `yazi/theme.toml`.
+- **delta**: se engancha vía `git config --global include.path` apuntando a este
+  repo. Si movés el repo, recorré el instalador.
+- **nvim transparente**: requiere que kitty tenga opacidad < 1 (ya la tenés en
+  `kitty.conf`) para que se note el "glass".

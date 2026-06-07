@@ -1,0 +1,59 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  monochrome.theme — btop dark glossy · white accent          ║
+# ╚══════════════════════════════════════════════════════════════╝
+# Todos los gradientes van de gris oscuro → blanco. Sin colores.
+
+theme[main_bg]="#050505"
+theme[main_fg]="#e8e8e8"
+theme[title]="#ffffff"
+theme[hi_fg]="#ffffff"
+theme[selected_bg]="#1a1a1a"
+theme[selected_fg]="#ffffff"
+theme[inactive_fg]="#555555"
+theme[graph_text]="#aaaaaa"
+theme[meter_bg]="#1a1a1a"
+theme[proc_misc]="#aaaaaa"
+
+# Cajas (bordes)
+theme[cpu_box]="#333333"
+theme[mem_box]="#333333"
+theme[net_box]="#333333"
+theme[proc_box]="#333333"
+theme[div_line]="#222222"
+
+# Temperatura (gradiente gris → blanco)
+theme[temp_start]="#555555"
+theme[temp_mid]="#aaaaaa"
+theme[temp_end]="#ffffff"
+
+# CPU
+theme[cpu_start]="#555555"
+theme[cpu_mid]="#999999"
+theme[cpu_end]="#ffffff"
+
+# Memoria libre / cache / disponible / usada
+theme[free_start]="#444444"
+theme[free_mid]="#888888"
+theme[free_end]="#dddddd"
+theme[cached_start]="#4a4a4a"
+theme[cached_mid]="#909090"
+theme[cached_end]="#e0e0e0"
+theme[available_start]="#505050"
+theme[available_mid]="#9a9a9a"
+theme[available_end]="#e8e8e8"
+theme[used_start]="#5a5a5a"
+theme[used_mid]="#aaaaaa"
+theme[used_end]="#ffffff"
+
+# Red (download / upload)
+theme[download_start]="#4a4a4a"
+theme[download_mid]="#909090"
+theme[download_end]="#e0e0e0"
+theme[upload_start]="#5a5a5a"
+theme[upload_mid]="#aaaaaa"
+theme[upload_end]="#ffffff"
+
+# Gradiente de procesos
+theme[process_start]="#555555"
+theme[process_mid]="#aaaaaa"
+theme[process_end]="#ffffff"

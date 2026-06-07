@@ -141,12 +141,23 @@ y() {
     fi
 }
 
-# ─── GREETING (eyecandy al abrir la terminal) ──────────────────
-# Solo en shells interactivas. Usa lo que esté instalado, en orden.
-if [[ -o interactive ]]; then
-    if   command -v pokemon-colorscripts &>/dev/null; then
-        pokemon-colorscripts -r --no-title 2>/dev/null
-    elif command -v colorscript &>/dev/null; then
-        colorscript random 2>/dev/null
-    fi
+# ─── EZA — COLORES MONOCROMÁTICOS (dark glossy white) ──────────
+# Gris para todo, blanco para directorios/ejecutables. Sin colores.
+export EZA_COLORS="reset:\
+di=1;38;5;255:\
+ex=4;38;5;255:\
+ln=38;5;245:\
+fi=38;5;250:\
+or=38;5;240:\
+ur=38;5;250:uw=38;5;245:ux=38;5;255:ue=38;5;255:\
+gr=38;5;245:gw=38;5;240:gx=38;5;250:\
+tr=38;5;240:tw=38;5;235:tx=38;5;245:\
+sn=38;5;250:sb=38;5;240:\
+uu=38;5;250:un=38;5;240:\
+da=38;5;243:\
+xx=38;5;236"
+
+# ─── ATUIN — historial (TUI oscura, sólo Ctrl-R) ───────────────
+if command -v atuin &>/dev/null; then
+    eval "$(atuin init zsh --disable-up-arrow)"
 fi

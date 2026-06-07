@@ -1,0 +1,39 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  theme.toml — yazi dark monochrome · white accent            ║
+# ╚══════════════════════════════════════════════════════════════╝
+# Schema actual de yazi usa [mgr]. Si tu versión avisa de [mgr],
+# renombralo a [manager].
+
+[mgr]
+cwd             = { fg = "#cccccc" }
+hovered         = { fg = "#050505", bg = "#ffffff" }
+preview_hovered = { underline = true }
+find_keyword    = { fg = "#ffffff", bold = true, underline = true }
+find_position   = { fg = "#888888" }
+marker_copied   = { fg = "#aaaaaa", bg = "#aaaaaa" }
+marker_cut      = { fg = "#555555", bg = "#555555" }
+marker_marked   = { fg = "#ffffff", bg = "#ffffff" }
+marker_selected = { fg = "#ffffff", bg = "#ffffff" }
+tab_active      = { fg = "#050505", bg = "#ffffff" }
+tab_inactive    = { fg = "#888888", bg = "#1a1a1a" }
+border_symbol   = "│"
+border_style    = { fg = "#333333" }
+
+[mode]
+normal_main = { fg = "#050505", bg = "#ffffff", bold = true }
+normal_alt  = { fg = "#ffffff", bg = "#1a1a1a" }
+select_main = { fg = "#050505", bg = "#aaaaaa", bold = true }
+select_alt  = { fg = "#aaaaaa", bg = "#1a1a1a" }
+unset_main  = { fg = "#050505", bg = "#666666", bold = true }
+unset_alt   = { fg = "#666666", bg = "#1a1a1a" }
+
+[status]
+separator_open  = ""
+separator_close = ""
+
+# Todo monocromático: gris para archivos, blanco para directorios.
+[filetype]
+rules = [
+  { name = "*/", fg = "#ffffff" },
+  { name = "*",  fg = "#cccccc" },
+]

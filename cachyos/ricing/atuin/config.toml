@@ -1,0 +1,23 @@
+## ╔══════════════════════════════════════════════════════════════╗
+## ║  atuin — historial de shell · TUI compacta y oscura          ║
+## ╚══════════════════════════════════════════════════════════════╝
+## Los colores los toma de la terminal (kitty monochrome), así que
+## la TUI ya sale dark glossy white sin tocar nada más.
+
+## Layout compacto e inline (no toma toda la pantalla).
+style = "compact"
+inline_height = 18
+show_preview = true
+show_help = false
+
+## Búsqueda
+search_mode = "fuzzy"
+filter_mode = "global"
+filter_mode_shell_up_key_binding = "session"
+
+## Privacidad: nada de sync por defecto.
+auto_sync = false
+update_check = false
+
+## Que ↑ siga navegando líneas normales (atuin sólo en Ctrl-R).
+enter_accept = true
