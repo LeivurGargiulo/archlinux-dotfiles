@@ -1,0 +1,89 @@
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  userChrome.css — Firefox dark glossy · monochrome           ║
+   ║  Compacto, oscuro, sin title bar. Pensado para Hyprland/HyDE. ║
+   ╚══════════════════════════════════════════════════════════════╝
+   Activar: about:config → toolkit.legacyUserProfileCustomizations.stylesheets = true
+   y colocar este archivo en <perfil>/chrome/userChrome.css  (lo hace install-ricing.sh). */
+
+:root {
+  --glw-bg:        #050505;   /* fondo base   */
+  --glw-bg-soft:   #0d0d0d;   /* barras       */
+  --glw-fg:        #e8e8e8;   /* texto        */
+  --glw-muted:     #777777;   /* texto tenue  */
+  --glw-accent:    #ffffff;   /* acento mono  */
+  --glw-border:    #1a1a1a;
+  --toolbarbutton-border-radius: 8px !important;
+}
+
+/* ─── Fondo oscuro global del chrome ─────────────────────────── */
+#navigator-toolbox,
+#nav-bar,
+#PersonalToolbar,
+#titlebar,
+.tabbrowser-tab {
+  background-color: var(--glw-bg) !important;
+  color: var(--glw-fg) !important;
+  border: none !important;
+}
+
+/* ─── Tabs slim, monocromáticas ──────────────────────────────── */
+.tabbrowser-tab {
+  font-size: 12px !important;
+}
+.tab-background {
+  background: transparent !important;
+  border-radius: 8px !important;
+}
+.tabbrowser-tab[selected] .tab-background {
+  background: var(--glw-bg-soft) !important;
+  box-shadow: inset 0 0 0 1px var(--glw-border) !important;
+}
+.tab-label { color: var(--glw-muted) !important; }
+.tabbrowser-tab[selected] .tab-label { color: var(--glw-accent) !important; }
+
+/* Línea de acento blanca arriba del tab activo */
+.tabbrowser-tab[selected] .tab-background::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 12%; right: 12%;
+  height: 2px;
+  background: var(--glw-accent);
+  border-radius: 2px;
+}
+
+/* ─── URL bar tipo "glass" ───────────────────────────────────── */
+#urlbar,
+#searchbar {
+  background: var(--glw-bg-soft) !important;
+  color: var(--glw-fg) !important;
+  border: 1px solid var(--glw-border) !important;
+  border-radius: 10px !important;
+}
+#urlbar[focused="true"] {
+  box-shadow: 0 0 0 1px var(--glw-accent) !important;
+}
+
+/* ─── Botones de la toolbar ──────────────────────────────────── */
+.toolbarbutton-1 > .toolbarbutton-icon,
+.toolbarbutton-1 > .toolbarbutton-badge-stack {
+  fill: var(--glw-muted) !important;
+  color: var(--glw-muted) !important;
+}
+.toolbarbutton-1:hover > .toolbarbutton-icon {
+  background: var(--glw-bg-soft) !important;
+  fill: var(--glw-accent) !important;
+}
+
+/* ─── Limpieza: ocultar lo que no usás ───────────────────────── */
+/* Descomentá lo que quieras esconder: */
+/* #firefox-view-button,  */          /* botón Firefox View */
+/* #alltabs-button,       */          /* lista de pestañas  */
+.titlebar-spacer { display: none !important; }
+
+/* ─── Popups / menús oscuros ─────────────────────────────────── */
+menupopup, panel {
+  --panel-background: var(--glw-bg-soft) !important;
+  --panel-color: var(--glw-fg) !important;
+  --panel-border-color: var(--glw-border) !important;
+  --panel-border-radius: 10px !important;
+}

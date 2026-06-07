@@ -140,3 +140,13 @@ y() {
         [[ -n "$cwd" && "$cwd" != "$PWD" ]] && cd "$cwd"
     fi
 }
+
+# ─── GREETING (eyecandy al abrir la terminal) ──────────────────
+# Solo en shells interactivas. Usa lo que esté instalado, en orden.
+if [[ -o interactive ]]; then
+    if   command -v pokemon-colorscripts &>/dev/null; then
+        pokemon-colorscripts -r --no-title 2>/dev/null
+    elif command -v colorscript &>/dev/null; then
+        colorscript random 2>/dev/null
+    fi
+fi
