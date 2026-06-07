@@ -21,6 +21,44 @@ log_warn()    { echo -e "  ${YELLOW}⚠${RESET}  $1"; }
 log_info()    { echo -e "  ${CYAN}→${RESET}  $1"; }
 log_error()   { echo -e "  ${RED}✗${RESET}  $1" >&2; }
 
+# ─── INSTALACIÓN RESILIENTE ────────────────────────────────────
+# Paquetes que fallaron, para reportarlos al final.
+FAILED_PKGS=()
+
+# pac <pkg...> — instala paquetes oficiales SIN abortar el script si alguno
+# falla. Intenta en batch; si el batch falla, reintenta uno por uno para
+# aislar el/los paquete(s) problemático(s) y seguir con el resto.
+pac() {
+    if sudo pacman -S --noconfirm --needed "$@"; then
+        return 0
+    fi
+    log_warn "El batch falló; reintentando paquete por paquete..."
+    local p
+    for p in "$@"; do
+        if ! sudo pacman -S --noconfirm --needed "$p"; then
+            log_error "No se pudo instalar: $p"
+            FAILED_PKGS+=("$p")
+        fi
+    done
+    return 0
+}
+
+# aur <pkg...> — igual que pac() pero usando yay (AUR).
+aur() {
+    if yay -S --noconfirm --needed "$@"; then
+        return 0
+    fi
+    log_warn "El batch AUR falló; reintentando paquete por paquete..."
+    local p
+    for p in "$@"; do
+        if ! yay -S --noconfirm --needed "$p"; then
+            log_error "No se pudo instalar (AUR): $p"
+            FAILED_PKGS+=("$p")
+        fi
+    done
+    return 0
+}
+
 # ─── PRECONDICIONES ────────────────────────────────────────────
 if [[ "$EUID" -eq 0 ]]; then
     log_error "No ejecutes este script como root. Usa tu usuario normal con sudo."
@@ -47,7 +85,7 @@ log_ok "Shell cambiada a zsh para $USER"
 
 # ─── 3. DRIVERS AMD ────────────────────────────────────────────
 log_title "3. Drivers AMD (open-source)"
-sudo pacman -S --noconfirm --needed \
+pac \
     mesa \
     lib32-mesa \
     vulkan-radeon \
@@ -63,7 +101,7 @@ log_ok "Drivers AMD instalados"
 
 # ─── 4. HYPRLAND ECOSYSTEM ─────────────────────────────────────
 log_title "4. Hyprland y ecosistema Wayland"
-sudo pacman -S --noconfirm --needed \
+pac \
     hyprland \
     hyprlock \
     hypridle \
@@ -100,7 +138,7 @@ log_ok "Hyprland ecosystem instalado"
 
 # ─── 5. FILE MANAGERS ──────────────────────────────────────────
 log_title "5. File managers"
-sudo pacman -S --noconfirm --needed \
+pac \
     thunar \
     thunar-archive-plugin \
     thunar-volman \
@@ -121,7 +159,7 @@ log_ok "File managers instalados"
 
 # ─── 6. FUENTES ────────────────────────────────────────────────
 log_title "6. Fuentes"
-sudo pacman -S --noconfirm --needed \
+pac \
     noto-fonts \
     noto-fonts-emoji \
     noto-fonts-cjk \
@@ -136,7 +174,7 @@ log_ok "Fuentes instaladas"
 
 # ─── 7. CLI TOOLS ──────────────────────────────────────────────
 log_title "7. CLI tools"
-sudo pacman -S --noconfirm --needed \
+pac \
     tmux \
     starship \
     bat \
@@ -162,7 +200,7 @@ log_ok "CLI tools instalados"
 
 # ─── 8. DEV TOOLS ──────────────────────────────────────────────
 log_title "8. Herramientas de desarrollo"
-sudo pacman -S --noconfirm --needed \
+pac \
     neovim \
     github-cli \
     docker \
@@ -189,7 +227,7 @@ log_ok "Dev tools instalados"
 
 # ─── 9. ESTUDIO ────────────────────────────────────────────────
 log_title "9. Herramientas de estudio"
-sudo pacman -S --noconfirm --needed \
+pac \
     zathura \
     zathura-pdf-mupdf \
     zathura-djvu \
@@ -199,7 +237,7 @@ log_ok "Herramientas de estudio instaladas"
 
 # ─── 10. APPS GENERALES ────────────────────────────────────────
 log_title "10. Aplicaciones generales"
-sudo pacman -S --noconfirm --needed \
+pac \
     firefox \
     vlc \
     gimp \
@@ -235,7 +273,7 @@ fi
 # ─── 13. AUR PACKAGES ──────────────────────────────────────────
 log_title "13. Paquetes AUR"
 log_info "Instalando paquetes AUR (puede tardar)..."
-yay -S --noconfirm --needed \
+aur \
     visual-studio-code-bin \
     wlogout \
     hyprshot \
@@ -285,6 +323,29 @@ log_ok "Directorios creados"
 
 # XDG user dirs
 xdg-user-dirs-update
+
+# ─── VERIFICACIÓN ──────────────────────────────────────────────
+log_title "Verificación"
+
+# Hyprland es crítico: sin él no hay sesión. Avisar fuerte si falta.
+if command -v Hyprland &>/dev/null || command -v hyprland &>/dev/null; then
+    log_ok "Hyprland está instalado"
+else
+    log_error "Hyprland NO quedó instalado — la sesión gráfica no va a arrancar."
+    log_error "Instalalo a mano: sudo pacman -S hyprland"
+fi
+
+# Resumen de paquetes que fallaron durante la instalación.
+if [[ ${#FAILED_PKGS[@]} -gt 0 ]]; then
+    log_warn "Estos paquetes fallaron y NO se instalaron (${#FAILED_PKGS[@]}):"
+    for p in "${FAILED_PKGS[@]}"; do
+        echo -e "      ${RED}•${RESET} $p"
+    done
+    log_warn "Revisá los nombres (¿renombrados/movidos al AUR?) y reintentá:"
+    log_warn "  sudo pacman -S <paquete>   |   yay -S <paquete>"
+else
+    log_ok "Todos los paquetes se instalaron correctamente"
+fi
 
 # ─── FINALIZACIÓN ──────────────────────────────────────────────
 echo ""
