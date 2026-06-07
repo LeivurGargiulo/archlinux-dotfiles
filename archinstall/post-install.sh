@@ -258,17 +258,18 @@ fi
 
 # ─── 14. DOTFILES ──────────────────────────────────────────────
 log_title "14. Dotfiles"
-if [[ ! -d "$HOME/dotfiles" ]]; then
+DOTFILES_DIR="$HOME/archlinux-dotfiles"
+if [[ ! -d "$DOTFILES_DIR" ]]; then
     log_info "Clonando dotfiles..."
-    git clone https://github.com/leivur/dotfiles.git "$HOME/dotfiles"
+    git clone https://github.com/LeivurGargiulo/archlinux-dotfiles.git "$DOTFILES_DIR"
     log_ok "Dotfiles clonados"
 else
     log_ok "Dotfiles ya están presentes (git pull)"
-    git -C "$HOME/dotfiles" pull --rebase
+    git -C "$DOTFILES_DIR" pull --rebase
 fi
 
 log_info "Ejecutando install.sh..."
-bash "$HOME/dotfiles/install.sh"
+bash "$DOTFILES_DIR/install.sh"
 
 # ─── 15. DIRECTORIOS ───────────────────────────────────────────
 log_title "15. Creando directorios"
