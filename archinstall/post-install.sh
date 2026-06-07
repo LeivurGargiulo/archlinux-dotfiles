@@ -79,9 +79,20 @@ sudo pacman -Syu --noconfirm
 log_ok "Sistema actualizado"
 
 # ─── 2. SHELL ZSH ──────────────────────────────────────────────
-log_title "2. Cambiar shell a zsh"
-sudo chsh -s /usr/bin/zsh "$USER"
-log_ok "Shell cambiada a zsh para $USER"
+log_title "2. Instalar y configurar zsh"
+# Instalar zsh ANTES de cambiar la shell: si no existe, chsh falla y
+# (con set -e) abortaría todo el script antes de instalar nada más.
+pac zsh zsh-autosuggestions zsh-syntax-highlighting
+
+zsh_bin="$(command -v zsh || true)"
+if [[ -z "$zsh_bin" ]]; then
+    log_error "zsh no se pudo instalar; se mantiene la shell actual."
+elif [[ "$SHELL" == "$zsh_bin" ]]; then
+    log_ok "La shell ya es zsh ($zsh_bin)"
+else
+    sudo chsh -s "$zsh_bin" "$USER"
+    log_ok "Shell cambiada a zsh ($zsh_bin) para $USER"
+fi
 
 # ─── 3. DRIVERS AMD ────────────────────────────────────────────
 log_title "3. Drivers AMD (open-source)"
