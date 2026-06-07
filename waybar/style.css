@@ -1,0 +1,285 @@
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  waybar/style.css — leivur @ gamdias                        ║
+   ║  Dark glossy glass · Monochrome                             ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+* {
+    font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── WINDOW (bar background) ────────────────────────────────── */
+window#waybar {
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+    transition: background 0.3s ease;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* ── TOOLTIP ────────────────────────────────────────────────── */
+tooltip {
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 6px 10px;
+}
+
+tooltip label {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── MODULE BASE ────────────────────────────────────────────── */
+.modules-left,
+.modules-center,
+.modules-right {
+    padding: 0 4px;
+}
+
+#workspaces,
+#window,
+#clock,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#tray,
+#custom-notifs,
+#custom-power {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 5px 3px;
+    padding: 0 12px;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect on all modules */
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#battery:hover,
+#custom-notifs:hover,
+#custom-power:hover,
+#clock:hover {
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+}
+
+/* ── WORKSPACES ─────────────────────────────────────────────── */
+#workspaces {
+    padding: 0 4px;
+    margin: 5px 3px;
+}
+
+#workspaces button {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 14px;
+    margin: 2px 1px;
+    min-width: 28px;
+    padding: 2px 6px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#workspaces button.active {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    color: #ffffff;
+}
+
+#workspaces button.urgent {
+    background: rgba(255, 255, 255, 0.20);
+    color: #ffffff;
+    animation: blink 1s step-start infinite;
+}
+
+#workspaces button.persistent {
+    color: rgba(255, 255, 255, 0.22);
+}
+
+/* ── WINDOW TITLE ───────────────────────────────────────────── */
+#window {
+    color: rgba(255, 255, 255, 0.60);
+    font-weight: 400;
+    max-width: 300px;
+}
+
+#window.empty {
+    background: transparent;
+    border-color: transparent;
+}
+
+/* ── CLOCK ──────────────────────────────────────────────────── */
+#clock {
+    color: rgba(255, 255, 255, 0.90);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ── PULSEAUDIO ─────────────────────────────────────────────── */
+#pulseaudio {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#pulseaudio.muted {
+    color: rgba(255, 255, 255, 0.30);
+}
+
+/* ── NETWORK ────────────────────────────────────────────────── */
+#network {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#network.disconnected,
+#network.disabled {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── CPU ────────────────────────────────────────────────────── */
+#cpu {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#cpu.warning {
+    color: rgba(255, 255, 255, 0.90);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#cpu.critical {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+    animation: blink 0.8s step-start infinite;
+}
+
+/* ── MEMORY ─────────────────────────────────────────────────── */
+#memory {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#memory.warning {
+    color: rgba(255, 255, 255, 0.90);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#memory.critical {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+    animation: blink 0.8s step-start infinite;
+}
+
+/* ── TEMPERATURE ────────────────────────────────────────────── */
+#temperature {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#temperature.warning {
+    color: rgba(255, 255, 255, 0.90);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#temperature.critical {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+    animation: blink 0.6s step-start infinite;
+}
+
+/* ── BATTERY ────────────────────────────────────────────────── */
+#battery {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#battery.charging,
+#battery.plugged {
+    color: rgba(255, 255, 255, 0.90);
+}
+
+#battery.warning:not(.charging) {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#battery.critical:not(.charging) {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+    animation: blink 1s step-start infinite;
+}
+
+/* ── TRAY ───────────────────────────────────────────────────── */
+#tray {
+    padding: 0 6px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* ── CUSTOM: NOTIFICATIONS ──────────────────────────────────── */
+#custom-notifs {
+    font-size: 16px;
+    padding: 0 10px;
+    color: rgba(255, 255, 255, 0.70);
+}
+
+#custom-notifs.dnd-none,
+#custom-notifs.dnd-notification,
+#custom-notifs.dnd-inhibited-none,
+#custom-notifs.dnd-inhibited-notification {
+    color: rgba(255, 255, 255, 0.30);
+}
+
+#custom-notifs.notification,
+#custom-notifs.inhibited-notification {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── CUSTOM: POWER ──────────────────────────────────────────── */
+#custom-power {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 15px;
+    padding: 0 12px;
+}
+
+#custom-power:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── BLINK ANIMATION ────────────────────────────────────────── */
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.3; }
+}

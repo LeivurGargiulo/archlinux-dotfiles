@@ -1,0 +1,190 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  starship.toml — leivur @ gamdias                           ║
+# ║  Two-line prompt · Monochrome · Minimal icons               ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+# ─── FORMAT ────────────────────────────────────────────────────
+format = """
+$os\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$golang\
+$docker_context\
+$cmd_duration\
+$line_break\
+$character"""
+
+right_format = "$time"
+
+add_newline = true
+
+# ─── OS ────────────────────────────────────────────────────────
+[os]
+disabled = false
+style = "fg:#555555"
+[os.symbols]
+Arch = " "
+Linux = " "
+
+# ─── USERNAME ──────────────────────────────────────────────────
+[username]
+style_user = "fg:#888888"
+style_root = "fg:#cccccc bold"
+format = "[$user]($style)"
+disabled = false
+show_always = false
+
+# ─── HOSTNAME ──────────────────────────────────────────────────
+[hostname]
+ssh_only = true
+style = "fg:#666666"
+format = "[@$hostname]($style) "
+disabled = false
+
+# ─── DIRECTORY ─────────────────────────────────────────────────
+[directory]
+style = "fg:#ffffff bold"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 3
+truncate_to_repo = true
+read_only = " 󰌾"
+read_only_style = "fg:#555555"
+home_symbol = "~"
+use_os_path_sep = true
+
+[directory.substitutions]
+"~/Documents"  = "󰈙 docs"
+"~/Downloads"  = " dl"
+"~/Projects"   = "󰲋 proj"
+"~/.config"    = " conf"
+"~/dotfiles"   = "󰊠 dots"
+"~/Pictures"   = "󰉔 pics"
+
+# ─── GIT BRANCH ────────────────────────────────────────────────
+[git_branch]
+symbol = " "
+style = "fg:#666666"
+format = "[$symbol$branch(:$remote_branch)]($style) "
+truncation_length = 24
+truncation_symbol = "…"
+ignore_branches = []
+
+# ─── GIT STATUS ────────────────────────────────────────────────
+[git_status]
+style = "fg:#555555"
+format = "([$all_status$ahead_behind]($style) )"
+conflicted = "⚡"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = "󰆓"
+modified = "~${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+# ─── PYTHON ────────────────────────────────────────────────────
+[python]
+symbol = " "
+style = "fg:#555555"
+format = "[$symbol($version )(\\($virtualenv\\) )]($style)"
+detect_extensions = ["py"]
+detect_files = ["requirements.txt", "pyproject.toml", "setup.py", ".python-version", "Pipfile"]
+detect_folders = [".venv", "venv", "__pypackages__"]
+version_format = "v${major}.${minor}"
+
+# ─── NODE.JS ───────────────────────────────────────────────────
+[nodejs]
+symbol = " "
+style = "fg:#555555"
+format = "[$symbol($version )]($style)"
+detect_extensions = ["js", "mjs", "cjs", "ts", "mts", "cts"]
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+version_format = "v${major}.${minor}"
+
+# ─── RUST ──────────────────────────────────────────────────────
+[rust]
+symbol = " "
+style = "fg:#555555"
+format = "[$symbol($version )]($style)"
+version_format = "v${major}.${minor}"
+detect_extensions = ["rs"]
+detect_files = ["Cargo.toml"]
+
+# ─── GO ────────────────────────────────────────────────────────
+[golang]
+symbol = " "
+style = "fg:#555555"
+format = "[$symbol($version )]($style)"
+version_format = "v${major}.${minor}"
+detect_extensions = ["go"]
+detect_files = ["go.mod", "go.sum"]
+
+# ─── DOCKER ────────────────────────────────────────────────────
+[docker_context]
+symbol = " "
+style = "fg:#555555"
+format = "[$symbol$context ]($style)"
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+only_with_files = true
+
+# ─── COMMAND DURATION ──────────────────────────────────────────
+[cmd_duration]
+min_time = 3_000
+style = "fg:#444444"
+format = "[ $duration]($style)"
+show_milliseconds = false
+show_notifications = false
+
+# ─── CHARACTER ─────────────────────────────────────────────────
+[character]
+success_symbol = "[❯](fg:#ffffff)"
+error_symbol = "[❯](fg:#666666)"
+vimcmd_symbol = "[❮](fg:#888888)"
+vimcmd_replace_one_symbol = "[❮](fg:#666666)"
+vimcmd_replace_symbol = "[❮](fg:#666666)"
+vimcmd_visual_symbol = "[❮](fg:#777777)"
+
+# ─── TIME (right prompt) ───────────────────────────────────────
+[time]
+disabled = false
+format = "[$time]($style)"
+style = "fg:#333333"
+time_format = "%H:%M"
+utc_time_offset = "local"
+
+# ─── DISABLED MODULES ──────────────────────────────────────────
+[aws]
+disabled = true
+[gcloud]
+disabled = true
+[azure]
+disabled = true
+[conda]
+disabled = true
+[package]
+disabled = true
+[terraform]
+disabled = true
+[kubernetes]
+disabled = true
+[helm]
+disabled = true
+[nix_shell]
+disabled = true
+[battery]
+disabled = true
+[shell]
+disabled = true
+[jobs]
+disabled = true
+[line_break]
+disabled = false

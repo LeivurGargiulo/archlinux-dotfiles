@@ -1,0 +1,144 @@
+{
+    "additional-repositories": ["multilib"],
+    "archinstall-language": "English",
+    "audio_config": {
+        "audio": "pipewire"
+    },
+    "bootloader": "Grub",
+    "debug": false,
+    "disk_config": {
+        "config_type": "default_layout",
+        "device_modifications": [
+            {
+                "device": "/dev/nvme0n1",
+                "partitions": [
+                    {
+                        "btrfs": [],
+                        "flags": ["Boot"],
+                        "fs_type": "fat32",
+                        "length": {
+                            "sector_size": null,
+                            "total_size": null,
+                            "unit": "GiB",
+                            "value": 1
+                        },
+                        "mount_options": [],
+                        "mountpoint": "/boot/efi",
+                        "obj_id": "efi-part",
+                        "start": {
+                            "sector_size": null,
+                            "total_size": null,
+                            "unit": "MiB",
+                            "value": 1
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    },
+                    {
+                        "btrfs": [],
+                        "flags": [],
+                        "fs_type": "linux-swap",
+                        "length": {
+                            "sector_size": null,
+                            "total_size": null,
+                            "unit": "GiB",
+                            "value": 16
+                        },
+                        "mount_options": [],
+                        "mountpoint": null,
+                        "obj_id": "swap-part",
+                        "start": {
+                            "sector_size": null,
+                            "total_size": null,
+                            "unit": "GiB",
+                            "value": 1
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    },
+                    {
+                        "btrfs": [],
+                        "flags": [],
+                        "fs_type": "ext4",
+                        "length": {
+                            "sector_size": null,
+                            "total_size": null,
+                            "unit": "Percent",
+                            "value": 100
+                        },
+                        "mount_options": [],
+                        "mountpoint": "/",
+                        "obj_id": "root-part",
+                        "start": {
+                            "sector_size": null,
+                            "total_size": null,
+                            "unit": "GiB",
+                            "value": 17
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    }
+                ],
+                "wipe": true
+            }
+        ]
+    },
+    "disk_encryption": {},
+    "hostname": "gamdias",
+    "kernels": ["linux"],
+    "locale_config": {
+        "kb_layout": "latam",
+        "sys_enc": "UTF-8",
+        "sys_lang": "en_US"
+    },
+    "mirror_config": {
+        "mirror_regions": {
+            "Argentina": [],
+            "Brazil": [],
+            "Chile": []
+        }
+    },
+    "network_config": {
+        "type": "nm"
+    },
+    "no_pkg_lookups": false,
+    "ntp": true,
+    "offline": false,
+    "packages": [
+        "base-devel",
+        "git",
+        "curl",
+        "wget",
+        "nano",
+        "vim",
+        "zsh",
+        "zsh-completions",
+        "man-db",
+        "man-pages",
+        "amd-ucode",
+        "bluez",
+        "bluez-utils",
+        "blueman",
+        "ntfs-3g",
+        "dosfstools",
+        "openssh",
+        "btop",
+        "fastfetch",
+        "reflector"
+    ],
+    "parallel downloads": 5,
+    "profile_config": {
+        "gfx_driver": "AMD / ATI (open-source)",
+        "greeter": "none",
+        "profile": {
+            "custom_settings": {},
+            "main": "Minimal"
+        }
+    },
+    "script": "guided",
+    "silent": false,
+    "skip_ntp": false,
+    "swap": false,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "version": "2.7.2"
+}

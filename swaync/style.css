@@ -1,0 +1,225 @@
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  swaync/style.css — leivur @ gamdias                        ║
+   ║  Glass dark · Monochrome · Blur                             ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+* {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    background: none;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* ── CONTROL CENTER PANEL ───────────────────────────────────── */
+.control-center {
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 16px;
+    color: rgba(255, 255, 255, 0.82);
+    padding: 12px 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.60);
+}
+
+/* ── TITLE WIDGET ───────────────────────────────────────────── */
+.widget-title {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 4px 8px 8px 8px;
+    padding: 0 4px;
+}
+
+.widget-title > label {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+}
+
+.widget-title > button {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+    padding: 4px 10px;
+}
+
+.widget-title > button:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── DND TOGGLE ─────────────────────────────────────────────── */
+.widget-dnd {
+    margin: 4px 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.widget-dnd > switch {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+}
+
+.widget-dnd > switch:checked {
+    background: rgba(255, 255, 255, 0.20);
+    border-color: rgba(255, 255, 255, 0.30);
+}
+
+.widget-dnd > switch slider {
+    background: rgba(255, 255, 255, 0.70);
+    border-radius: 10px;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.widget-dnd > switch:checked slider {
+    background: #ffffff;
+}
+
+/* ── NOTIFICATIONS LIST ─────────────────────────────────────── */
+.notification-row {
+    margin: 4px 6px;
+    padding: 0;
+}
+
+.notification-row:hover {
+    background: transparent;
+}
+
+/* Individual notification card */
+.notification {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.82);
+    padding: 12px;
+    margin: 2px 0;
+}
+
+.notification:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.notification.critical {
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.09);
+}
+
+/* App icon */
+.notification-icon {
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+/* Summary / title */
+.notification-summary {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.90);
+}
+
+/* Body */
+.notification-body {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: 2px;
+}
+
+/* App name + time row */
+.notification-default-action > .notification-content > .notification-action-box > .notification-default-action-label {
+    color: rgba(255, 255, 255, 0.40);
+    font-size: 11px;
+}
+
+/* Close button */
+.close-button {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.50);
+    min-width: 22px;
+    min-height: 22px;
+    padding: 0;
+    margin: 0 0 0 6px;
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.90);
+}
+
+/* Action buttons inside notifications */
+.notification-action {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 12px;
+    margin: 6px 4px 0 0;
+    padding: 4px 10px;
+}
+
+.notification-action:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.90);
+}
+
+/* ── POPUP (toast) ──────────────────────────────────────────── */
+.floating-notifications {
+    background: transparent;
+}
+
+.blank-window {
+    background: transparent;
+}
+
+.notification-popup {
+    background: rgba(0, 0, 0, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.70);
+    padding: 4px;
+    margin: 6px;
+}
+
+.notification-popup.critical {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────────── */
+scrollbar {
+    background: transparent;
+    border-radius: 4px;
+    min-width: 4px;
+}
+
+scrollbar slider {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    min-height: 30px;
+    min-width: 4px;
+}
+
+scrollbar slider:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── EMPTY STATE ────────────────────────────────────────────── */
+.control-center-list-placeholder {
+    color: rgba(255, 255, 255, 0.20);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 32px 0;
+}

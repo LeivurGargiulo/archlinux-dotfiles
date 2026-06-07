@@ -1,0 +1,238 @@
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  waybar/config.jsonc — leivur @ gamdias                     ║
+// ║  Dock inferior · Glass dark · Monochrome                    ║
+// ╚══════════════════════════════════════════════════════════════╝
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 42,
+    "margin-bottom": 8,
+    "margin-left": 16,
+    "margin-right": 16,
+    "spacing": 4,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "temperature",
+        "battery",
+        "tray",
+        "custom/notifs",
+        "custom/power"
+    ],
+
+    // ── WORKSPACES ──────────────────────────────────────────────
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "󰈹",
+            "2": "",
+            "3": "󰭹",
+            "4": "󰙯",
+            "5": "󱢺",
+            "6": "󰎆",
+            "7": "󰎉",
+            "8": "󰎌",
+            "9": "󰎍",
+            "10": "󰎐",
+            "active": "",
+            "default": "󰊰",
+            "urgent": "󰀦"
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        },
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "smooth-scrolling-threshold": 1
+    },
+
+    // ── WINDOW TITLE ────────────────────────────────────────────
+    "hyprland/window": {
+        "format": "{}",
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "󰈹  $1",
+            "(.*) - Mozilla Firefox": "󰈹  $1",
+            "Mozilla Firefox": "󰈹  Firefox",
+            "(.*)\\s-\\sNVIM": "  $1",
+            "(.*)\\s—\\sNVIM": "  $1",
+            "nvim": "  nvim",
+            "kitty": "  kitty",
+            "zsh": "  zsh",
+            "Thunar": "󰉋  Thunar",
+            "(.*)": "$1"
+        },
+        "max-length": 60,
+        "separate-outputs": true
+    },
+
+    // ── CLOCK ───────────────────────────────────────────────────
+    "clock": {
+        "timezone": "America/Argentina/Buenos_Aires",
+        "format": "  {:%H:%M}",
+        "format-alt": "  {:%A, %d %B %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffffff'><b>{}</b></span>",
+                "days": "<span color='#aaaaaa'><b>{}</b></span>",
+                "weeks": "<span color='#555555'><b>W{}</b></span>",
+                "weekdays": "<span color='#777777'><b>{}</b></span>",
+                "today": "<span color='#ffffff'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    // ── PULSEAUDIO ──────────────────────────────────────────────
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "󰝟  Muted",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "scroll-step": 2,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "smooth-scrolling-threshold": 1
+    },
+
+    // ── NETWORK ─────────────────────────────────────────────────
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀  {ifname}",
+        "format-linked": "󰈀  {ifname} (no IP)",
+        "format-disconnected": "󰤭  Off",
+        "format-disabled": "󰤭  Disabled",
+        "tooltip-format-wifi": "  {essid}\n󰦴  {ipaddr}/{cidr}\n  {signalStrength}%\n  {frequency}GHz\n↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}",
+        "tooltip-format-ethernet": "󰈀  {ifname}\n󰦴  {ipaddr}/{cidr}\n↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}",
+        "on-click": "nm-connection-editor",
+        "interval": 5
+    },
+
+    // ── CPU ─────────────────────────────────────────────────────
+    "cpu": {
+        "format": "  {usage}%",
+        "format-alt": "  {avg_frequency}GHz",
+        "tooltip-format": "CPU Usage: {usage}%\nLoad: {load}",
+        "interval": 2,
+        "on-click": "kitty -e btop",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    // ── MEMORY ──────────────────────────────────────────────────
+    "memory": {
+        "format": "  {used:0.1f}G",
+        "format-alt": "  {percentage}%",
+        "tooltip-format": "RAM: {used:0.2f}G / {total:0.2f}G\nSwap: {swapUsed:0.2f}G / {swapTotal:0.2f}G",
+        "interval": 4,
+        "on-click": "kitty -e btop",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    // ── TEMPERATURE ─────────────────────────────────────────────
+    "temperature": {
+        "hwmon-path-abs": "/sys/class/hwmon",
+        "input-filename": "temp1_input",
+        "critical-threshold": 85,
+        "format": "  {temperatureC}°C",
+        "format-critical": "  {temperatureC}°C",
+        "tooltip-format": "CPU temp: {temperatureC}°C",
+        "interval": 5,
+        "states": {
+            "warning": 70,
+            "critical": 85
+        }
+    },
+
+    // ── BATTERY ─────────────────────────────────────────────────
+    "battery": {
+        "states": {
+            "good": 90,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "󰂄  {capacity}%",
+        "format-plugged": "󰚥  {capacity}%",
+        "format-alt": "{icon}  {time}",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "{timeTo}\nPower: {power}W",
+        "interval": 30
+    },
+
+    // ── TRAY ────────────────────────────────────────────────────
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8,
+        "show-passive-items": false
+    },
+
+    // ── CUSTOM: NOTIFICATIONS ───────────────────────────────────
+    "custom/notifs": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󰂞",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰪑",
+            "inhibited-notification": "󰂞",
+            "inhibited-none": "󰂜",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "task=\"swaync-client -t -sw\"; $task",
+        "on-click-right": "task=\"swaync-client -d -sw\"; $task",
+        "escape": true
+    },
+
+    // ── CUSTOM: POWER MENU ──────────────────────────────────────
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "choices=(\"󰒲  Suspender\" \"󰜉  Reiniciar\" \"󰐥  Apagar\"); choice=$(printf '%s\n' \"${choices[@]}\" | wofi --dmenu --prompt='Sistema' --width=220 --height=160); case \"$choice\" in *Suspender*) systemctl suspend ;; *Reiniciar*) systemctl reboot ;; *Apagar*) systemctl poweroff ;; esac"
+    }
+}
